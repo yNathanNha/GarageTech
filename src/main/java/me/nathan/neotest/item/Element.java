@@ -118,8 +118,7 @@ public enum Element {
     MOSCOVIUM(0xFFFFA000, "Moscovium", "Mc", 115, false, true),
     LIVERMORIUM(0xFFFFC000, "Livermorium", "Lv", 116, false, true),
     TENNESSINE(0xFFFFE000, "Tennessine", "Ts", 117, false, false),
-    OGANESSON(0xFFFFFF00, "Oganesson", "Og", 118, true, false),
-    NEUTRONIUM(0xFFFFFF00, "Neutronium", "Nu", 118, true, false);
+    OGANESSON(0xFFFFFF00, "Oganesson", "Og", 118, true, false);
 
     private final int tintColor;
     private final String textureName;
