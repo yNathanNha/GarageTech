@@ -1,0 +1,19 @@
+{
+  "itemGroup.neotest": "Example Mod Tab",
+  "itemGroup.neotest.tools": "Tools",
+  "block.neotest.example_block": "Example Block",
+  "item.neotest.example_item": "Example Item",
+
+  "item.neotest.tool_format": "%s %s",
+
+  "item.neotest.wire_cutter": "Wire Cutter",
+  "item.neotest.screwdriver": "Screwdriver",
+
+  "tool_material.neotest.bronze": "Bronze",
+  "tool_material.neotest.steel": "Steel",
+  "tool_material.neotest.titanium": "Titanium",
+  "tool_material.neotest.tungsten": "Tungsten",
+  "tool_material.neotest.diamond": "Diamond",
+  "tool_material.neotest.netherite": "Netherite"
+
+}
