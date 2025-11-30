@@ -8,12 +8,14 @@ import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.registries.DeferredItem;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 @EventBusSubscriber(modid = Main.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -26,6 +28,14 @@ public class BaseToolItem extends Item {
         super(new Item.Properties().stacksTo(1).durability(250));
         this.material = material;
         this.toolType = toolType;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
+
+        tooltip.add(Component.literal("§e"+material.getSerializedName()));
+
+        super.appendHoverText(stack, context, tooltip, tooltipFlag);
     }
 
     // Add this method to BaseToolItem.java
