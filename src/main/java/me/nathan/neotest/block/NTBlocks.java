@@ -1,6 +1,7 @@
 package me.nathan.neotest.block;
 
 import me.nathan.neotest.Main;
+import me.nathan.neotest.block.machines.BasicMaceratorBlock;
 import me.nathan.neotest.item.NTItems;
 import net.minecraft.core.Holder;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -27,6 +28,12 @@ public class NTBlocks {
     public static final DeferredBlock<Block> BLUE_STONE = registerBlock("blue_stone",
             () -> new DropExperienceBlock(UniformInt.of(3, 6),
                     BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+
+    public static final Supplier<BasicMaceratorBlock> BASIC_MACERATOR =
+            registerBlock("basic_macerator", () ->
+                    new BasicMaceratorBlock(BlockBehaviour.Properties.of()
+                            .strength(3.5f)
+                            .noLootTable()));
 
     public static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);

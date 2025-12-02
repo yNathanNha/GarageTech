@@ -1,18 +1,15 @@
 package me.nathan.neotest.item;
 
 import me.nathan.neotest.Main;
-import me.nathan.neotest.block.NTBlocks;
-import me.nathan.neotest.item.tool.BaseToolItem;
+import me.nathan.neotest.item.custom.BaseDust;
+import me.nathan.neotest.item.custom.BaseIngot;
 import me.nathan.neotest.item.tool.Screwdriver;
 import me.nathan.neotest.item.tool.WireCutter;
-import net.minecraft.core.Holder;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import org.apache.http.impl.conn.Wire;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +19,8 @@ public class NTItems {
     // === STORAGE FOR EASY LOOKUP ===
     public static final Map<ToolMaterial, DeferredItem<Item>> WIRE_CUTTERS = new HashMap<>();
     public static final Map<ToolMaterial, DeferredItem<Item>> SCREWDRIVERS = new HashMap<>();
+    public static final Map<Element, DeferredItem<Item>> INGOTS = new HashMap<>();
+    public static final Map<Element, DeferredItem<Item>> DUSTS = new HashMap<>();
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Main.MODID);
 
@@ -52,6 +51,25 @@ public class NTItems {
             DeferredItem<Item> holder = ITEMS.register(name, () -> new Screwdriver(mat, "screwdriver"));
             SCREWDRIVERS.put(mat, holder);  // ← store it here!
         }
+
+        for (Element ele : Element.values()) {
+            if(ele.isRegisterIngot()) {
+
+                String name = ele.getTextureName() + "_ingot";
+                DeferredItem<Item> holder = ITEMS.register(name, () -> new BaseIngot(ele, "ingot"));
+                INGOTS.put(ele, holder);  // ← store it here!
+
+            }
+            if (ele.isRegisterDust()) {
+
+                String name = ele.getTextureName() + "_dust";
+                DeferredItem<Item> holder = ITEMS.register(name, () -> new BaseDust(ele, "dust"));
+                DUSTS.put(ele, holder);  // ← store it here!
+
+            }
+
+        }
+
     }
 
     // Helper method — now working perfectly
@@ -63,6 +81,31 @@ public class NTItems {
             // These will never be null — we put them in the map ourselves
             output.accept(wireCutter.get());
             output.accept(screwdriver.get());
+        }
+    }
+
+    public static void addAllIngotsToTab(CreativeModeTab.Output output) {
+        for (Element ele : Element.values()) {
+
+            if (ele.isRegisterIngot()) {
+
+                DeferredItem<Item> ingots = INGOTS.get(ele);
+                output.accept(ingots.get());
+
+                if(ele.isRegisterDust()) {
+                    DeferredItem<Item> dusts = DUSTS.get(ele);
+                    output.accept(dusts.get());
+                }
+
+            } else if(ele.isGas()) {
+
+            } else if(ele.isLiquid()) {
+
+            } else {
+
+
+            }
+
         }
     }
 

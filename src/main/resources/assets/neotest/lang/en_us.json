@@ -1,13 +1,21 @@
 {
   "itemGroup.neotest": "Example Mod Tab",
   "itemGroup.neotest.tools": "Tools",
+  "itemGroup.neotest.ores": "Ores",
   "block.neotest.example_block": "Example Block",
   "item.neotest.example_item": "Example Item",
 
   "item.neotest.tool_format": "%s %s",
+  "item.neotest.ingot_format": "%s %s",
+  "item.neotest.dust_format": "%s %s",
 
   "item.neotest.wire_cutter": "Wire Cutter",
   "item.neotest.screwdriver": "Screwdriver",
+  "item.neotest.ingot": "Ingot",
+  "item.neotest.dust": "Dust",
+
+
+  "element.neotest.hydrogen": "",
 
   "tool_material.neotest.bronze": "Bronze",
   "tool_material.neotest.steel": "Steel",

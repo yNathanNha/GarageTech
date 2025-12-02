@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "lit=false": { "model": "neotest:block/basic_macerator" },
+    "lit=true":  { "model": "neotest:block/basic_macerator" }
+  }
+}
