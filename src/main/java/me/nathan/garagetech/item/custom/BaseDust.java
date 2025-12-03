@@ -4,6 +4,7 @@ package me.nathan.garagetech.item.custom;
 import me.nathan.garagetech.Main;
 import me.nathan.garagetech.item.Element;
 import me.nathan.garagetech.item.NTItems;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -14,6 +15,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.registries.DeferredItem;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 @EventBusSubscriber(modid = Main.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -29,8 +31,19 @@ public class BaseDust extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
-        super.appendHoverText(stack, context, tooltip, tooltipFlag);
+    public void appendHoverText(ItemStack stack, @Nullable Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+        // Get the color from the element
+        int color = material.getTintColor(); // e.g. 0xFFEB00AE
+        int r = (color >> 16) & 0xFF;
+        int g = (color >> 8)  & 0xFF;
+        int b = color         & 0xFF;
+
+        // Create colored text using the exact RGB from the element
+        tooltip.add(Component.literal(material.getSymbol())
+                .withColor(net.minecraft.util.FastColor.ARGB32.color(255, r, g, b))
+                .withStyle(ChatFormatting.BOLD)); // optional: make it bold
+
+        super.appendHoverText(stack, context, tooltip, flag);
     }
 
     @Override

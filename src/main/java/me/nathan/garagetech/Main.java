@@ -4,10 +4,12 @@ import com.mojang.logging.LogUtils;
 import me.nathan.garagetech.block.NTBlockEntities;
 import me.nathan.garagetech.block.NTBlocks;
 import me.nathan.garagetech.block.renderer.BasicMaceratorRenderer;
+import me.nathan.garagetech.capability.GTCapabilities;
 import me.nathan.garagetech.item.NTCreativeTabs;
 import me.nathan.garagetech.item.NTItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.api.distmarker.Dist;
@@ -19,6 +21,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
@@ -52,6 +55,10 @@ public class Main {
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+    }
+
+    public static ResourceLocation resource(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

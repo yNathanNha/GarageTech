@@ -30,6 +30,9 @@ public class BaseIngot extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
+
+        tooltip.add(Component.literal("§e" + material.getSymbol()));
+
         super.appendHoverText(stack, context, tooltip, tooltipFlag);
     }
 
