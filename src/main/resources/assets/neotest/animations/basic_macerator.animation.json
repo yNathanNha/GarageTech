@@ -1,0 +1,35 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.macerator.working": {
+			"loop": true,
+			"animation_length": 1,
+			"bones": {
+				"crushing_wheel_0": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"1.0": {
+							"vector": [0, 0, -360]
+						}
+					}
+				},
+				"crushing_wheel_1": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"1.0": {
+							"vector": [0, 0, 360]
+						}
+					}
+				}
+			}
+		},
+		"animation.macerator.idle": {
+			"loop": true
+		}
+	},
+	"geckolib_format_version": 2
+}

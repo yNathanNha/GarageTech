@@ -1,0 +1,52 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 128,
+				"texture_height": 128,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.75, 0]
+			},
+			"bones": [
+				{
+					"name": "macerator",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "walls",
+					"parent": "macerator",
+					"pivot": [8, 0, 0],
+					"cubes": [
+						{"origin": [-6, 0, -6], "size": [12, 2, 12], "uv": [0, 0]},
+						{"origin": [-6, 0, -8], "size": [12, 16, 1], "uv": [32, 62]},
+						{"origin": [-6, 0, 6], "size": [12, 2, 2], "uv": [58, 62]},
+						{"origin": [-9, 0, -9], "size": [16, 16, 2], "pivot": [7, 0, -8], "rotation": [0, 90, 0], "uv": [0, 14]},
+						{"origin": [-24, 0, -8], "size": [16, 16, 2], "pivot": [-8, 0, -8], "rotation": [0, 90, 0], "uv": [0, 32]},
+						{"origin": [-6, 6, 6], "size": [12, 10, 1], "uv": [48, 0]}
+					]
+				},
+				{
+					"name": "crushing_wheel_0",
+					"parent": "macerator",
+					"pivot": [3, 14, 0.5],
+					"cubes": [
+						{"origin": [1, 12, -6], "size": [4, 4, 12], "uv": [36, 14]},
+						{"origin": [1, 12, -6], "size": [4, 4, 12], "pivot": [3, 14, -5], "rotation": [0, 0, -45], "uv": [36, 30]}
+					]
+				},
+				{
+					"name": "crushing_wheel_1",
+					"parent": "macerator",
+					"pivot": [-3, 14, 0.5],
+					"cubes": [
+						{"origin": [-5, 12, -6], "size": [4, 4, 12], "uv": [36, 46]},
+						{"origin": [-5, 12, -6], "size": [4, 4, 12], "pivot": [-3, 14, -5], "rotation": [0, 0, -45], "uv": [0, 50]}
+					]
+				}
+			]
+		}
+	]
+}
