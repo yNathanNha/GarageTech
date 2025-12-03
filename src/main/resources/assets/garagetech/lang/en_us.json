@@ -1,0 +1,27 @@
+{
+  "itemGroup.garagetech": "Example Mod Tab",
+  "itemGroup.garagetech.tools": "Tools",
+  "itemGroup.garagetech.ores": "Ores",
+  "block.garagetech.example_block": "Example Block",
+  "item.garagetech.example_item": "Example Item",
+
+  "item.garagetech.tool_format": "%s %s",
+  "item.garagetech.ingot_format": "%s %s",
+  "item.garagetech.dust_format": "%s %s",
+
+  "item.garagetech.wire_cutter": "Wire Cutter",
+  "item.garagetech.screwdriver": "Screwdriver",
+  "item.garagetech.ingot": "Ingot",
+  "item.garagetech.dust": "Dust",
+
+
+  "element.garagetech.hydrogen": "",
+
+  "tool_material.garagetech.bronze": "Bronze",
+  "tool_material.garagetech.steel": "Steel",
+  "tool_material.garagetech.titanium": "Titanium",
+  "tool_material.garagetech.tungsten": "Tungsten",
+  "tool_material.garagetech.diamond": "Diamond",
+  "tool_material.garagetech.netherite": "Netherite"
+
+}

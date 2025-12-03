@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "lit=false": { "model": "garagetech:block/basic_macerator" },
+    "lit=true":  { "model": "garagetech:block/basic_macerator" }
+  }
+}

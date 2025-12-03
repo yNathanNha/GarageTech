@@ -1,0 +1,5 @@
+{
+  "loader": "neoforge:obj",
+  "model": "garagetech:models/geo/basic_macerator.geo.json",
+  "flip-v": true
+}

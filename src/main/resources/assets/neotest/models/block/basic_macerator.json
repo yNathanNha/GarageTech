@@ -1,5 +1,0 @@
-{
-  "loader": "neoforge:obj",
-  "model": "neotest:models/geo/basic_macerator.geo.json",
-  "flip-v": true
-}
