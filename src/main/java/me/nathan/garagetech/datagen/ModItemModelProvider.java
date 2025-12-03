@@ -1,9 +1,10 @@
 package me.nathan.garagetech.datagen;
 
 import me.nathan.garagetech.Main;
-import me.nathan.garagetech.item.Element;
+import me.nathan.garagetech.material.Alloy;
+import me.nathan.garagetech.material.Element;
 import me.nathan.garagetech.item.NTItems;
-import me.nathan.garagetech.item.ToolMaterial;
+import me.nathan.garagetech.material.ToolMaterial;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -37,6 +38,17 @@ public class ModItemModelProvider extends ItemModelProvider {
                 withExistingParent(name, mcLoc("item/handheld"))
                         .texture("layer0", modLoc("item/dust"));
             }
+        }
+
+        for(Alloy alloy : Alloy.values()) {
+            String name = alloy.getTextureName() + "_ingot";
+            withExistingParent(name, mcLoc("item/handheld"))
+                    .texture("layer0", modLoc("item/ingot-2"));
+
+            String namedust = alloy.getTextureName() + "_dust";
+            withExistingParent(namedust, mcLoc("item/handheld"))
+                    .texture("layer0", modLoc("item/dust"));
+
         }
 
         // Screwdriver

@@ -5,6 +5,10 @@ import me.nathan.garagetech.item.custom.BaseDust;
 import me.nathan.garagetech.item.custom.BaseIngot;
 import me.nathan.garagetech.item.tool.Screwdriver;
 import me.nathan.garagetech.item.tool.WireCutter;
+import me.nathan.garagetech.material.Alloy;
+import me.nathan.garagetech.material.Element;
+import me.nathan.garagetech.material.IMaterial;
+import me.nathan.garagetech.material.ToolMaterial;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -19,8 +23,8 @@ public class NTItems {
     // === STORAGE FOR EASY LOOKUP ===
     public static final Map<ToolMaterial, DeferredItem<Item>> WIRE_CUTTERS = new HashMap<>();
     public static final Map<ToolMaterial, DeferredItem<Item>> SCREWDRIVERS = new HashMap<>();
-    public static final Map<Element, DeferredItem<Item>> INGOTS = new HashMap<>();
-    public static final Map<Element, DeferredItem<Item>> DUSTS = new HashMap<>();
+    public static final Map<IMaterial, DeferredItem<Item>> INGOTS = new HashMap<>();
+    public static final Map<IMaterial, DeferredItem<Item>> DUSTS = new HashMap<>();
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Main.MODID);
 
@@ -41,14 +45,14 @@ public class NTItems {
         // === WIRE CUTTERS ===
         for (ToolMaterial mat : ToolMaterial.values()) {
             String name = mat.getSerializedName() + "_wire_cutter";
-            DeferredItem<Item> holder = ITEMS.register(name, () -> new WireCutter(mat, "wire_cutter"));
+            DeferredItem<Item> holder = ITEMS.register(name, () -> new WireCutter(mat.getMaterial(), "wire_cutter"));
             WIRE_CUTTERS.put(mat, holder);  // ← store it here!
         }
 
         // === SCREWDRIVERS ===
         for (ToolMaterial mat : ToolMaterial.values()) {
             String name = mat.getSerializedName() + "_screwdriver";
-            DeferredItem<Item> holder = ITEMS.register(name, () -> new Screwdriver(mat, "screwdriver"));
+            DeferredItem<Item> holder = ITEMS.register(name, () -> new Screwdriver(mat.getMaterial(), "screwdriver"));
             SCREWDRIVERS.put(mat, holder);  // ← store it here!
         }
 
@@ -67,6 +71,17 @@ public class NTItems {
                 DUSTS.put(ele, holder);  // ← store it here!
 
             }
+        }
+
+        for (Alloy ele : Alloy.values()) {
+
+                String name = ele.getTextureName() + "_ingot";
+                DeferredItem<Item> holder = ITEMS.register(name, () -> new BaseIngot(ele, "ingot"));
+                INGOTS.put(ele, holder);  // ← store it here!
+
+                String name_dust = ele.getTextureName() + "_dust";
+                DeferredItem<Item> holder_dust = ITEMS.register(name_dust, () -> new BaseDust(ele, "dust"));
+                DUSTS.put(ele, holder_dust);  // ← store it here!
 
         }
 
@@ -85,6 +100,16 @@ public class NTItems {
     }
 
     public static void addAllIngotsToTab(CreativeModeTab.Output output) {
+
+        for(Alloy alloy : Alloy.values()) {
+            DeferredItem<Item> ingots = INGOTS.get(alloy);
+            output.accept(ingots.get());
+
+            DeferredItem<Item> dusts = DUSTS.get(alloy);
+            output.accept(dusts.get());
+
+        }
+
         for (Element ele : Element.values()) {
 
             if (ele.isRegisterIngot()) {

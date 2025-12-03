@@ -1,6 +1,8 @@
-package me.nathan.garagetech.item;
+package me.nathan.garagetech.material;
 
-public enum Element {
+import java.util.Map;
+
+public enum Element implements IMaterial {
     HYDROGEN(0xFFE0FFFF, "Hydrogen", "H", 1, true, false, false, false),
     HELIUM(0xFFFFD0D0, "Helium", "He", 2, true, false, false, false),
     LITHIUM(0xFFCC80FF, "Lithium", "Li", 3, false, true, true, false),
@@ -141,8 +143,6 @@ public enum Element {
         this.registerLiquid = registerLiquid;
     }
 
-    public int getTintColor() { return tintColor; }
-    public String getTextureName() { return textureName.toLowerCase(); }
     public String getName() { return textureName; }
     public String getSymbol() { return symbol; }
     public int getAtomicNumber() { return atomicNumber; }
@@ -150,4 +150,31 @@ public enum Element {
     public boolean isRegisterIngot() { return registerIngot; }
     public boolean isRegisterDust() { return registerDust; }
     public boolean isLiquid() { return registerLiquid; }
+
+    @Override
+    public int getTintColor() {
+        return tintColor;
+    }
+
+    @Override
+    public String getTextureName() {
+        return textureName.toLowerCase();
+    }
+
+    @Override
+    public int getDurability() {
+        return 100; // default for elements
+    }
+
+    @Override
+    public Map<Element, Integer> getComposition() {
+        return Map.of(this, 1);
+    }
+
+    @Override
+    public String getChemicalFormula() {
+        return getSymbol();
+    }
+
+
 }

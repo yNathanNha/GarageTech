@@ -2,9 +2,10 @@
 package me.nathan.garagetech.item.custom;
 
 import me.nathan.garagetech.Main;
-import me.nathan.garagetech.item.Element;
+import me.nathan.garagetech.material.Alloy;
+import me.nathan.garagetech.material.Element;
 import me.nathan.garagetech.item.NTItems;
-import net.minecraft.ChatFormatting;
+import me.nathan.garagetech.material.IMaterial;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -21,29 +22,32 @@ import java.util.List;
 @EventBusSubscriber(modid = Main.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class BaseDust extends Item {
 
-    private final Element material;
+    private final IMaterial material;
     private final String itemType; // "wire_cutter" or "screwdriver"
 
-    public BaseDust(Element material, String itemType) {
-        super(new Properties().stacksTo(1).durability(250));
+    public BaseDust(IMaterial material, String itemType) {
+        super(new Properties().stacksTo(1).stacksTo(64));
         this.material = material;
         this.itemType = itemType;
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
-        // Get the color from the element
-        int color = material.getTintColor(); // e.g. 0xFFEB00AE
-        int r = (color >> 16) & 0xFF;
-        int g = (color >> 8)  & 0xFF;
-        int b = color         & 0xFF;
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
 
-        // Create colored text using the exact RGB from the element
-        tooltip.add(Component.literal(material.getSymbol())
-                .withColor(net.minecraft.util.FastColor.ARGB32.color(255, r, g, b))
-                .withStyle(ChatFormatting.BOLD)); // optional: make it bold
+        if (material instanceof Alloy alloy) {
+            tooltip.add(alloy.getColoredChemicalFormula());
+        } else {
+            int color = material.getTintColor(); // e.g. 0xFFEB00AE
+            int r = (color >> 16) & 0xFF;
+            int g = (color >> 8)  & 0xFF;
+            int b = color         & 0xFF;
 
-        super.appendHoverText(stack, context, tooltip, flag);
+            // Create colored text using the exact RGB from the element
+            tooltip.add(Component.literal(material.getChemicalFormula())
+                    .withColor(net.minecraft.util.FastColor.ARGB32.color(255, r, g, b)));
+        }
+
+        super.appendHoverText(stack, context, tooltip, tooltipFlag);
     }
 
     @Override
@@ -53,12 +57,12 @@ public class BaseDust extends Item {
 
         // "%s Wire Cutter" where %s = material name
         return Component.translatable("item." + Main.MODID + ".dust_format",
-                getMaterial().getName(),
+                Component.translatable(getMaterial().getTranslationKey()),
                 Component.translatable(toolKey)
         );
     }
 
-    public Element getMaterial() { return material; }
+    public IMaterial getMaterial() { return material; }
     public String getItemType() { return itemType; }
 
     @SubscribeEvent
@@ -72,17 +76,4 @@ public class BaseDust extends Item {
         );
     }
 
-
-    /*public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
-        event.register(
-                (stack, tintIndex) -> tintIndex == 1 && stack.getItem() instanceof BaseIngot tool
-                        ? tool.getMaterial().getTintColor() : 0xFFFFFFFF,
-
-                // One line – all tools from both maps
-                Stream.concat(
-                        NTItems.INGOTS.values().stream(),
-                        NTItems.SCREWDRIVERS.values().stream()
-                ).toArray(DeferredItem[]::new)
-        );
-    }*/
 }

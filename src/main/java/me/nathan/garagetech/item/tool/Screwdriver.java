@@ -1,7 +1,8 @@
 package me.nathan.garagetech.item.tool;
 
 import com.mojang.logging.LogUtils;
-import me.nathan.garagetech.item.ToolMaterial;
+import me.nathan.garagetech.material.IMaterial;
+import me.nathan.garagetech.material.ToolMaterial;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.context.UseOnContext;
 import org.slf4j.Logger;
@@ -10,7 +11,7 @@ public class Screwdriver extends BaseToolItem {
 
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public Screwdriver(ToolMaterial material, String toolType) {
+    public Screwdriver(IMaterial material, String toolType) {
         super(material, toolType);
     }
 

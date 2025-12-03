@@ -3,7 +3,9 @@ package me.nathan.garagetech.item.tool;
 
 import me.nathan.garagetech.Main;
 import me.nathan.garagetech.item.NTItems;
-import me.nathan.garagetech.item.ToolMaterial;
+import me.nathan.garagetech.material.Alloy;
+import me.nathan.garagetech.material.IMaterial;
+import me.nathan.garagetech.material.ToolMaterial;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -20,10 +22,10 @@ import java.util.stream.Stream;
 @EventBusSubscriber(modid = Main.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class BaseToolItem extends Item {
 
-    private final ToolMaterial material;
+    private final IMaterial material;
     private final String toolType; // "wire_cutter" or "screwdriver"
 
-    public BaseToolItem(ToolMaterial material, String toolType) {
+    public BaseToolItem(IMaterial material, String toolType) {
         super(new Item.Properties().stacksTo(1).durability(250));
         this.material = material;
         this.toolType = toolType;
@@ -32,7 +34,18 @@ public class BaseToolItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
 
-        tooltip.add(Component.literal("§e"+material.getSerializedName()));
+        if (material instanceof Alloy alloy) {
+            tooltip.add(alloy.getColoredChemicalFormula());
+        } else {
+            int color = material.getTintColor(); // e.g. 0xFFEB00AE
+            int r = (color >> 16) & 0xFF;
+            int g = (color >> 8)  & 0xFF;
+            int b = color         & 0xFF;
+
+            // Create colored text using the exact RGB from the element
+            tooltip.add(Component.literal(material.getChemicalFormula())
+                    .withColor(net.minecraft.util.FastColor.ARGB32.color(255, r, g, b)));
+        }
 
         super.appendHoverText(stack, context, tooltip, tooltipFlag);
     }
@@ -45,12 +58,12 @@ public class BaseToolItem extends Item {
 
         // "%s Wire Cutter" where %s = material name
         return Component.translatable("item." + Main.MODID + ".tool_format",
-                getMaterial().getDisplayName(),
+                Component.translatable(getMaterial().getTranslationKey()),
                 Component.translatable(toolKey)
         );
     }
 
-    public ToolMaterial getMaterial() { return material; }
+    public IMaterial getMaterial() { return material; }
     public String getToolType() { return toolType; }
 
     @SubscribeEvent

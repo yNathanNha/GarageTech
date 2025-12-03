@@ -2,6 +2,8 @@ package me.nathan.garagetech.item;
 
 import me.nathan.garagetech.Main;
 import me.nathan.garagetech.block.NTBlocks;
+import me.nathan.garagetech.material.Element;
+import me.nathan.garagetech.material.ToolMaterial;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -21,7 +23,7 @@ public class NTCreativeTabs {
 
     }).build());
 
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> TOOLS_TAB = CREATIVE_MODE_TABS.register("tools_tab", () -> CreativeModeTab.builder().title(Component.translatable("itemGroup.garagetech.tools")).icon(() -> NTItems.WIRE_CUTTERS.get(ToolMaterial.DIAMOND).asItem().getDefaultInstance()).displayItems((parameters, output) -> {
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> TOOLS_TAB = CREATIVE_MODE_TABS.register("tools_tab", () -> CreativeModeTab.builder().title(Component.translatable("itemGroup.garagetech.tools")).icon(() -> NTItems.WIRE_CUTTERS.get(ToolMaterial.BRONZE).asItem().getDefaultInstance()).displayItems((parameters, output) -> {
 
         NTItems.addAllToolsToTab(output);
 
